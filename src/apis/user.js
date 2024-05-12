@@ -2,7 +2,7 @@
 import request from '@/utils/http.js'
 
 // ---------------------------
-// 销售人员相关
+// 登陆相关
 // ---------------------------
 export const loginAPI=({account,password,type})=>{
     return request({
@@ -18,6 +18,67 @@ export const logoutAPI=(type)=>{
     return request({
         url: '/'+type+'/logout',
         method:'POST',
+    })
+}
+
+// ---------------------------
+// 销售人员相关
+// ---------------------------
+
+// 获取负责分类
+export const getSellerCategoryAPI=()=>{
+    return request({
+        url:'/seller/category',
+        method:'GET'
+    })
+}
+
+// 获取指定分类下商品总数
+export const getGoodsCountAPI=({id,type})=>{
+    return request({
+        url:'/seller/goods/count',
+        method:'GET',
+        params:{
+            id,
+            type
+        }
+    })
+}
+
+// 获取指定分类下商品
+export const getGoodsAPI=({page,pageSize,id,type})=>{
+    return request({
+        url:'/seller/goods',
+        method:'GET',
+        params:{
+            id,
+            page,
+            pageSize,
+            type
+        }
+    })
+}
+
+// 删除商品（伪）
+export const deleteGoodsAPI=(id)=>{
+    return request({
+        url:'/seller/goods',
+        method:'DELETE',
+        params:{
+            id
+        }
+    })
+}
+
+// 修改商品sku价格、库存
+export const updateSkuPriceAndInventoryAPI=(goods_id,skus)=>{
+    return request({
+        url:'/seller/modify/goods/sku',
+        method:'POST',
+        data:{
+            goods_id,
+            skus
+        }
     })
 }
 

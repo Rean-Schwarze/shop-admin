@@ -49,7 +49,7 @@ const doLogin=()=>{
       // 提示、跳转
       if (Object.keys(userStore.userInfo).length!==0){
         ElMessage({ type: 'success', message: '登录成功' })
-        await router.replace({path: '/seller'})
+        await router.replace({path: '/'+type})
       }
     }
   })

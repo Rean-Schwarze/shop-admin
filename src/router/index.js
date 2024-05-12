@@ -4,6 +4,9 @@ import Layout from '@/views/Layout/index.vue'
 import Seller from '@/views/Seller/index.vue'
 import Admin from '@/views/Admin/index.vue'
 import Home from '@/views/Home/index.vue'
+import SellerGoods from "@/views/Seller/components/SellerGoods.vue";
+import SellerOrder from "@/views/Seller/components/SellerOrder.vue";
+import SellerInfo from "@/views/Seller/components/SellerInfo.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -18,7 +21,21 @@ const router = createRouter({
         },
         {
           path:'seller',
-          component:Seller
+          component:Seller,
+          children:[
+            {
+              path:'',
+              component:SellerInfo
+            },
+            {
+              path:'goods',
+              component:SellerGoods,
+            },
+            {
+              path:'order',
+              component:SellerOrder
+            }
+          ]
         },
         {
           path:'admin',
