@@ -36,6 +36,8 @@ const confirm=async ()=>{
               </template>
             </el-popconfirm>
           </li>
+          <li><a href="javascript:;" @click="$router.push('/'+userStore.userInfo.type)">管理中心</a></li>
+          <li><a href="javascript:;" @click="$router.push('/')">返回首页</a></li>
 <!--          <li><a href="javascript:;" @click="$router.push('/member/order')">我的订单</a></li>-->
 <!--          <li><a href="javascript:;" @click="$router.push('/member/user')">会员中心</a></li>-->
         </template>

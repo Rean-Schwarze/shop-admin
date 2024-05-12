@@ -1,7 +1,9 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import Login from '@/views/Login/index.vue'
 import Layout from '@/views/Layout/index.vue'
-import Member from '@/views/Member/index.vue'
+import Seller from '@/views/Seller/index.vue'
+import Admin from '@/views/Admin/index.vue'
+import Home from '@/views/Home/index.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -12,7 +14,15 @@ const router = createRouter({
       children:[
         {
           path:'',
-          component:Member
+          component:Home
+        },
+        {
+          path:'seller',
+          component:Seller
+        },
+        {
+          path:'admin',
+          component:Admin
         }
       ]
     },
