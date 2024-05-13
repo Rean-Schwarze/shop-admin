@@ -274,6 +274,9 @@ const handleConfirm = async () => {
         ElMessage.error(res.message)
       }
     }
+    else{
+      ElMessage.warning("商品信息尚未填写完毕！")
+    }
   })
 };
 const imgMainUpload=async (info)=>{
