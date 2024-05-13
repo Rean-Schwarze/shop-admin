@@ -58,7 +58,7 @@ const clearEditIndex=(index,column)=>{
       :confirm-text="mode === MODE.ADD ? '添加' : '修改'"
   >
     <div class="addressWrapper">
-      <el-table :data="form">
+      <el-table :data="form" :table-layout="'auto'">
         <el-table-column prop="id" label="id" align="center"/>
         <el-table-column prop="attrsText" label="具体规格" align="center"/>
         <el-table-column label="价格" align="center">

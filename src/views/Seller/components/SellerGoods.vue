@@ -105,7 +105,7 @@ const handleSearch=()=>{
       </el-row>
     </div>
     <div class="main">
-      <el-table :data="goodsList" height="400">
+      <el-table :data="goodsList" height="400" :table-layout="'auto'">
         <el-table-column prop="id" label="商品id" align="center"/>
         <el-table-column prop="name" label="商品名称" align="center"/>
         <el-table-column prop="picture" label="商品图片" align="center">
