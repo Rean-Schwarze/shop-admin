@@ -82,6 +82,28 @@ export const updateSkuPriceAndInventoryAPI=(goods_id,skus)=>{
     })
 }
 
+// 添加商品
+export const addGoodsAPI=({name,desc,category,subCategory,subCategory2,specs,skus,isPreSale,isNew,isOnSale,pubTime})=>{
+    return request({
+        url:'/seller/goods',
+        method:'POST',
+        data:{name,desc,category,subCategory,subCategory2,specs,skus,isPreSale,isNew,isOnSale,pubTime}
+    })
+}
+
+// 上传商品图片
+export const uploadGoodsImagesAPI=(data)=>{
+    return request({
+        url:'/upload/seller/goods',
+        method:'POST',
+        data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+    })
+}
+
+
 // ---------------------------
 // 管理员相关
 // ---------------------------

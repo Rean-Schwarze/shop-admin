@@ -28,6 +28,7 @@ onMounted(()=>checkLogin())
         <h4>商品管理</h4>
         <div class="links">
           <RouterLink to="/seller/goods">商品列表</RouterLink>
+          <RouterLink to="/seller/add">添加商品</RouterLink>
         </div>
         <h4>订单管理</h4>
         <div class="links">
@@ -49,7 +50,7 @@ onMounted(()=>checkLogin())
 
   .xtx-member-aside {
     min-height: 400px;
-    width: 220px;
+    width: 190px;
     margin-right: 20px;
     border-radius: 2px;
     background-color: #fff;
@@ -105,7 +106,7 @@ onMounted(()=>checkLogin())
   }
 
   .article {
-    width: 1000px;
+    width: 1030px;
     background-color: #fff;
   }
 }

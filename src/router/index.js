@@ -7,6 +7,7 @@ import Home from '@/views/Home/index.vue'
 import SellerGoods from "@/views/Seller/components/SellerGoods.vue";
 import SellerOrder from "@/views/Seller/components/SellerOrder.vue";
 import SellerInfo from "@/views/Seller/components/SellerInfo.vue";
+import SellerAddGoods from '@/views/Seller/components/SellerAddGoods.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -34,6 +35,10 @@ const router = createRouter({
             {
               path:'order',
               component:SellerOrder
+            },
+            {
+              path:'add',
+              component:SellerAddGoods
             }
           ]
         },

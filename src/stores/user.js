@@ -2,7 +2,7 @@
 
 import {defineStore} from "pinia";
 import {ref} from "vue";
-import {loginAPI, uploadAvatarAPI} from "@/apis/user.js";
+import {loginAPI, uploadAvatarAPI, uploadGoodsImagesAPI} from "@/apis/user.js";
 import { ElMessage } from 'element-plus'
 
 export const useUserStore=defineStore('user',()=>{
@@ -26,8 +26,8 @@ export const useUserStore=defineStore('user',()=>{
         userInfo.value={}
     }
     // 上传头像
-    const uploadAvatar=async (formData)=>{
-        const res=await uploadAvatarAPI(formData);
+    const uploadGoodsImages=async (formData)=>{
+        const res=await uploadGoodsImagesAPI(formData);
         if(res.code===1){
             ElMessage.success("上传成功！")
             userInfo.value.avatar=res.result.url
@@ -41,7 +41,7 @@ export const useUserStore=defineStore('user',()=>{
         userInfo,
         getUserInfo,
         clearUserInfo,
-        uploadAvatar
+        uploadGoodsImages
     }
 },{
     persist:true,

@@ -111,7 +111,7 @@ const handleSearch=()=>{
         <el-table-column prop="picture" label="商品图片" align="center">
           <!-- 图片的显示 -->
           <template   #default="scope">
-            <img :src="scope.row.picture"  min-width="90" height="90" />
+            <img :src="scope.row.picture"  width="100" height="90" />
           </template>
         </el-table-column>
         <el-table-column prop="price" label="商品价格(￥)" align="center"/>
