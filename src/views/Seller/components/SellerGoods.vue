@@ -9,16 +9,19 @@ import GoodsEditDialog from "@/components/dialog/GoodsEditDialog.vue";
 import {MODE} from "@/composables/dialogTypes.js";
 
 
-onMounted(()=>categoryStore.getCategory())
+onMounted(()=>{
+  categoryStore.getCategory()
+  getGoods()
+})
 
 const goodsList=ref([])
 const total=ref(0)
 const pageParams= ref({
   page:1,
   pageSize:10,
-  type:''
+  type:'all'
 })
-const selectCategories=ref([])
+const selectCategories=ref([-1])
 const props = {
   expandTrigger: 'hover',
   checkStrictly: true,
@@ -97,7 +100,7 @@ const handleSearch=()=>{
         </el-col>
         <el-col :span="1"></el-col>
         <el-col :span="3">
-          <el-button type="primary">添加商品</el-button>
+          <el-button type="primary" @click="$router.push('/seller/add')">添加商品</el-button>
         </el-col>
       </el-row>
     </div>
