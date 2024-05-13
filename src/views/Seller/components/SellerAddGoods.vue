@@ -20,18 +20,18 @@ const activeName=ref("0")
 const beforeTabLeave=(activeName, oldActiveName)=>{
   // activeName是即将进入的标签页名称name
   // oldActiveName是即将离开的标签页名称name
-  // if((activeName ==='2' || activeName ==='3' || activeName ==='5') && form.value.category===null){
-  //   ElMessage.error('请先选择商品分类!')
-  //   return false
-  // }
-  // if((activeName ==='3' || activeName ==='5') && form.value.specs.length===0){
-  //   ElMessage.error('请先添加商品规格!')
-  //   return false
-  // }
-  // if(activeName==='5'&&goods_id.value<=0){
-  //   ElMessage.error('尚未完成商品添加!')
-  //   return false
-  // }
+  if((activeName ==='2' || activeName ==='3' || activeName ==='5') && form.value.category===null){
+    ElMessage.error('请先选择商品分类!')
+    return false
+  }
+  if((activeName ==='3' || activeName ==='5') && form.value.specs.length===0){
+    ElMessage.error('请先添加商品规格!')
+    return false
+  }
+  if(activeName==='5'&&goods_id.value<=0){
+    ElMessage.error('尚未完成商品添加!')
+    return false
+  }
 }
 const handlePrev=(index)=>{
   activeName.value=(parseInt(index) - 1).toString()
@@ -227,7 +227,6 @@ const imgMainList=ref<UploadUserFile[]>([])
 const dialogImageUrl = ref('')
 const dialogVisible = ref(false)
 const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
-  console.log(imgDetailList)
   dialogImageUrl.value = uploadFile.url!
       dialogVisible.value = true
 }
