@@ -8,6 +8,9 @@ import SellerGoods from "@/views/Seller/components/SellerGoods.vue";
 import SellerOrder from "@/views/Seller/components/SellerOrder.vue";
 import SellerInfo from "@/views/Seller/components/SellerInfo.vue";
 import SellerAddGoods from '@/views/Seller/components/SellerAddGoods.vue'
+import AdminInfo from '@/views/Admin/components/AdminInfo.vue'
+import AdminStatistics from "@/views/Admin/components/AdminStatistics.vue";
+import AdminAccount from "@/views/Admin/components/AdminAccount.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -44,7 +47,25 @@ const router = createRouter({
         },
         {
           path:'admin',
-          component:Admin
+          component:Admin,
+          children:[
+            {
+              path:'',
+              component: AdminInfo
+            },
+            {
+              path:'goods',
+              component:SellerGoods,
+            },
+            {
+              path:'statistics',
+              component: AdminStatistics
+            },
+            {
+              path:'account',
+              component: AdminAccount
+            }
+          ]
         }
       ]
     },

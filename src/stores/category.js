@@ -1,6 +1,7 @@
 import {ref} from 'vue'
 import { defineStore } from 'pinia'
 import {getSellerCategoryAPI} from "@/apis/user.js";
+import {getAllCategoryAPI} from "@/apis/category.js";
 
 export const useCategoryStore = defineStore('category', () => {
     // 导航列表数据管理
@@ -22,8 +23,14 @@ export const useCategoryStore = defineStore('category', () => {
         })
         return arr
     }
-    const getCategory=async ()=>{
-        const res = await getSellerCategoryAPI()
+    const getCategory=async (type)=>{
+        let res;
+        if(type==='seller'){
+            res = await getSellerCategoryAPI()
+        }
+        else{
+            res=await getAllCategoryAPI()
+        }
         const keymap = {
             id: "value",
             children: 'children',
@@ -33,7 +40,6 @@ export const useCategoryStore = defineStore('category', () => {
         }
         keyMap(res.result,keymap)
         categoryList.value=res.result
-
     }
 
     return {

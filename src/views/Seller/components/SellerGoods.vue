@@ -12,9 +12,14 @@ import {MODE} from "@/composables/dialogTypes.js";
 const categoryStore=useCategoryStore();
 const userStore=useUserStore();
 onMounted(()=>{
-  categoryStore.getCategory()
-  getGoods()
+  init()
 })
+
+const userType=userStore.userInfo.type
+const init=()=>{
+  categoryStore.getCategory(userType)
+  getGoods()
+}
 
 const goodsList=ref([])
 const total=ref(0)
@@ -34,9 +39,9 @@ const getGoods=async ()=>{
   if(type==='sub'){
     id=selectCategories.value[1]
   }
-  const count=await getGoodsCountAPI({id, type})
+  const count=await getGoodsCountAPI({id, type, userType})
   total.value=count.result
-  const res=await getGoodsAPI({page,pageSize,id,type})
+  const res=await getGoodsAPI({page,pageSize,id,type,userType})
   goodsList.value=res.result
 }
 const handleCategoryChange=async ()=>{
@@ -118,7 +123,8 @@ const handleLog=async (index,row)=>{
         </el-col>
         <el-col :span="1"></el-col>
         <el-col :span="3">
-          <el-button type="primary" @click="$router.push('/seller/add')">添加商品</el-button>
+          <el-button v-if="userType==='seller'" type="primary" @click="$router.push('/seller/add')">添加商品</el-button>
+          <el-button v-if="userType==='admin'" type="primary" @click="$router.push('/admin/statistics')">查看销售报表</el-button>
         </el-col>
       </el-row>
     </div>
@@ -137,7 +143,7 @@ const handleLog=async (index,row)=>{
         <el-table-column prop="totalSales" label="总销售数量" align="center"/>
         <el-table-column prop="totalVolume" label="总销售额(￥)" align="center"/>
         <el-table-column label="操作" align="center">
-          <template #default="scope">
+          <template #default="scope" v-if="userType==='seller'">
             <div class="table-button">
               <el-button size="default" @click="handleEdit(scope.$index, scope.row)" :icon="Edit"></el-button>
             </div>
@@ -150,6 +156,11 @@ const handleLog=async (index,row)=>{
                   type="danger" :icon="Delete"
                   @click="handleDelete(scope.$index, scope.row)"
               ></el-button>
+            </div>
+          </template>
+          <template #default="scope" v-else>
+            <div class="table-button">
+              <el-button size="default" @click="handleEdit(scope.$index, scope.row)" :icon="Edit"></el-button>
             </div>
           </template>
         </el-table-column>

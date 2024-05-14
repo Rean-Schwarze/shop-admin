@@ -34,9 +34,9 @@ export const getSellerCategoryAPI=()=>{
 }
 
 // 获取指定分类下商品总数
-export const getGoodsCountAPI=({id,type})=>{
+export const getGoodsCountAPI=({id,type,userType})=>{
     return request({
-        url:'/seller/goods/count',
+        url:'/'+userType+'/goods/count',
         method:'GET',
         params:{
             id,
@@ -46,9 +46,9 @@ export const getGoodsCountAPI=({id,type})=>{
 }
 
 // 获取指定分类下商品
-export const getGoodsAPI=({page,pageSize,id,type})=>{
+export const getGoodsAPI=({page,pageSize,id,type,userType})=>{
     return request({
-        url:'/seller/goods',
+        url:'/'+userType+'/goods',
         method:'GET',
         params:{
             id,
@@ -71,9 +71,9 @@ export const deleteGoodsAPI=(id)=>{
 }
 
 // 修改商品sku价格、库存
-export const updateSkuPriceAndInventoryAPI=(goods_id,skus)=>{
+export const updateSkuPriceAndInventoryAPI=(goods_id,skus,userType)=>{
     return request({
-        url:'/seller/modify/goods/sku',
+        url:'/'+userType+'/modify/goods/sku',
         method:'POST',
         data:{
             goods_id,

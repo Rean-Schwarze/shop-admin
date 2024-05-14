@@ -1,5 +1,11 @@
 import http from '@/utils/http.js'
 
+export function getAllCategoryAPI(){
+    return http({
+        url:'/home/category/head'
+    })
+}
+
 export function getCategoryAPI(id){
     return http({
         url:'/home/category',

@@ -6,9 +6,10 @@ import {useTableDialog} from "@/composables/useTableDialog.js";
 import {Edit} from '@element-plus/icons-vue';
 import {updateSkuPriceAndInventoryAPI} from '@/apis/user.js'
 import {ElMessage} from "element-plus";
+import {useUserStore} from "@/stores/user.js";
 
 const formRef=ref(null)
-
+const userStore=useUserStore();
 
 const { visible, mode, closeDialog, openDialog, form, selectedOptions } = useTableDialog(formRef)
 
@@ -17,8 +18,7 @@ defineExpose({
 })
 
 const confirm = async () => {
-  // if (!formRef.value) return;
-  const res=await updateSkuPriceAndInventoryAPI(form.value[0].goodsId,form.value)
+  const res=await updateSkuPriceAndInventoryAPI(form.value[0].goodsId,form.value,userStore.userInfo.type)
   if(res.code===1){
     ElMessage.success("修改成功！")
   }
