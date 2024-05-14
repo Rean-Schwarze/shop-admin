@@ -17,8 +17,7 @@ defineExpose({
 
 const confirm = async () => {
   // if (!formRef.value) return;
-  console.log(logParams)
-  // closeDialog()
+  closeDialog()
 }
 
 const customClose = () => {
