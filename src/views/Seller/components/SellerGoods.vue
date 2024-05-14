@@ -1,14 +1,16 @@
 <script setup>
 import {onMounted,ref} from "vue";
-import {Search, Close, Edit, Delete} from '@element-plus/icons-vue';
+import {Search, Close, Edit, Delete, Tickets} from '@element-plus/icons-vue';
 import {useCategoryStore} from "@/stores/category.js";
-const categoryStore=useCategoryStore();
+import {useUserStore} from "@/stores/user.js";
 import {getGoodsAPI,getGoodsCountAPI,deleteGoodsAPI} from '@/apis/user.js';
 import {ElMessage} from "element-plus";
 import GoodsEditDialog from "@/components/dialog/GoodsEditDialog.vue";
+import LogDialog from "@/components/dialog/LogDialog.vue";
 import {MODE} from "@/composables/dialogTypes.js";
 
-
+const categoryStore=useCategoryStore();
+const userStore=useUserStore();
 onMounted(()=>{
   categoryStore.getCategory()
   getGoods()
@@ -64,16 +66,32 @@ const handleDelete=async (index,row)=>{
   await getGoods()
 }
 
-const tableDialogRef=ref(GoodsEditDialog)
+const goodsTableDialogRef=ref(GoodsEditDialog)
+const logDialogRef=ref(LogDialog)
 
 const handleEdit=async (index,row)=>{
-  if(!tableDialogRef.value) return
-  tableDialogRef.value.openDialog(MODE.EDIT,row.skus)
+  if(!goodsTableDialogRef.value) return
+  goodsTableDialogRef.value.openDialog(MODE.EDIT,row.skus)
 }
 
 const searchText=ref("")
 const handleSearch=()=>{
 
+}
+
+const logParams=ref({
+  goods_id:-1,
+  page:1,
+  pageSize:10,
+  total:0
+})
+const handleLog=async (index,row)=>{
+  if(!logDialogRef.value) return
+  logParams.value.goods_id=row.id
+  const {goods_id,page,pageSize}=logParams.value
+  const {total,logs}=await userStore.getUserTpAndBuyLog({goods_id,page,pageSize})
+  logParams.value.total=total
+  logDialogRef.value.openDialog(MODE.READONLY,logs,logParams)
 }
 </script>
 
@@ -105,7 +123,7 @@ const handleSearch=()=>{
       </el-row>
     </div>
     <div class="main">
-      <el-table :data="goodsList" height="400" :table-layout="'auto'">
+      <el-table :data="goodsList" height="1200" :table-layout="'auto'">
         <el-table-column prop="id" label="商品id" align="center"/>
         <el-table-column prop="name" label="商品名称" align="center"/>
         <el-table-column prop="picture" label="商品图片" align="center">
@@ -124,6 +142,9 @@ const handleSearch=()=>{
               <el-button size="default" @click="handleEdit(scope.$index, scope.row)" :icon="Edit"></el-button>
             </div>
             <div class="table-button">
+              <el-button size="default" @click="handleLog(scope.$index, scope.row)" :icon="Tickets"></el-button>
+            </div>
+            <div class="table-button">
               <el-button
                   size="default"
                   type="danger" :icon="Delete"
@@ -140,7 +161,8 @@ const handleSearch=()=>{
       </div>
     </div>
   </div>
-  <GoodsEditDialog ref="tableDialogRef"/>
+  <GoodsEditDialog ref="goodsTableDialogRef"/>
+  <LogDialog ref="logDialogRef"/>
 </template>
 
 <style scoped lang="scss">

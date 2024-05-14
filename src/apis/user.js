@@ -103,6 +103,18 @@ export const uploadGoodsImagesAPI=(data)=>{
     })
 }
 
+// 获取用户日志（浏览、购买）
+export const getUserTpAndBuyLogAPI=({goods_id,page,pageSize})=>{
+    return request({
+        url:'/seller/log/user',
+        method:'GET',
+        params:{
+            goods_id,
+            page,
+            pageSize
+        }
+    })
+}
 
 // ---------------------------
 // 管理员相关

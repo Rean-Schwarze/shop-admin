@@ -45,6 +45,7 @@ declare module 'vue' {
     ElUpload: typeof import('element-plus/es')['ElUpload']
     GoodsEditDialog: typeof import('./src/components/dialog/GoodsEditDialog.vue')['default']
     ImageView: typeof import('./src/components/ImageView/index.vue')['default']
+    LogDialog: typeof import('./src/components/dialog/LogDialog.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     XtxSku: typeof import('./src/components/XtxSku/index.vue')['default']

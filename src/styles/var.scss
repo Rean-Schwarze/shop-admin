@@ -12,6 +12,10 @@ $priceColor: #cf4444;
   font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
 }
 
+.el-dialog{
+  --el-dialog-width: 80%;
+}
+
 // 浅色模式
 :root{
   --el-text-color-regular: #303030;

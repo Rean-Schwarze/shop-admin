@@ -6,13 +6,13 @@ export const useTableDialog=(tableInstance)=>{
 
     const form=ref([])
 
-    const selectedOptions = ref([])
+    const logParams = ref({})
 
     const closeDialog = () => {
         // tableInstance.value?.resetFields();
         visible.value = false;
     };
-    const openDialog = (target, newForm) => {
+    const openDialog = (target, newForm, newParams) => {
         updateMode(target);
         visible.value = true;
         // tableInstance.value?.resetFields();
@@ -22,6 +22,7 @@ export const useTableDialog=(tableInstance)=>{
         //     selectedOptions.value=form.value.region?.split(" ")
         // }
         form.value=newForm
+        logParams.value=newParams
     };
 
     const modeText = () => {
@@ -31,6 +32,6 @@ export const useTableDialog=(tableInstance)=>{
     }
 
     return{
-        visible, mode, openDialog, closeDialog, modeText, form, selectedOptions
+        visible, mode, openDialog, closeDialog, modeText, form, logParams
     }
 }
