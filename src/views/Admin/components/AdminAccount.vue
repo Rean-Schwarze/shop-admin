@@ -12,6 +12,7 @@ const sellerEditDialogRef=ref(SellerEditDialog)
 
 const init=async ()=>{
   await userStore.getBrands()
+  userStore.addAllToBrand()
 }
 
 onMounted(()=>{

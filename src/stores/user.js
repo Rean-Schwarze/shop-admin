@@ -4,12 +4,13 @@ import {defineStore} from "pinia";
 import {ref} from "vue";
 import {getUserTpAndBuyLogAPI, loginAPI, uploadGoodsImagesAPI} from "@/apis/user.js";
 import { ElMessage } from 'element-plus'
-import {getBrandsAPI} from "@/apis/admin.js";
+import {getBrandsAPI, uploadAvatarAPI} from "@/apis/admin.js";
 
 export const useUserStore=defineStore('user',()=>{
     //1. 定义管理用户数据的state
     const userInfo=ref({})
     const brands=ref([])
+    const avatar=ref("")
     //2. 定义获取接口数据的action函数
     const getUserInfo=async ({account, password,type})=>{
         const res=await loginAPI({account,password,type})
@@ -23,10 +24,12 @@ export const useUserStore=defineStore('user',()=>{
             })
         }
     }
+    const addAllToBrand=()=>{
+        brands.value.push({id:0,name:'全部'})
+    }
     const getBrands=async ()=>{
         const res=await getBrandsAPI()
         brands.value=res.result
-        brands.value.push({id:0,name:'全部'})
     }
     //4. 退出时清除用户信息
     const clearUserInfo=()=>{
@@ -37,7 +40,6 @@ export const useUserStore=defineStore('user',()=>{
         const res=await uploadGoodsImagesAPI(formData);
         if(res.code===1){
             ElMessage.success("上传成功！")
-            userInfo.value.avatar=res.result.url
         }
         else{
             ElMessage.error(res.message)
@@ -68,6 +70,17 @@ export const useUserStore=defineStore('user',()=>{
         }
 
     }
+    // 上传头像
+    const uploadAvatar=async (formData)=>{
+        const res=await uploadAvatarAPI(formData);
+        if(res.code===1){
+            ElMessage.success("上传成功！")
+            avatar.value=res.result.url
+        }
+        else{
+            ElMessage.error(res.message)
+        }
+    }
     //3. 以对象的格式把state和action返回
     return {
         userInfo,
@@ -76,7 +89,10 @@ export const useUserStore=defineStore('user',()=>{
         uploadGoodsImages,
         getUserTpAndBuyLog,
         brands,
-        getBrands
+        getBrands,
+        addAllToBrand,
+        uploadAvatar,
+        avatar
     }
 },{
     persist:true,

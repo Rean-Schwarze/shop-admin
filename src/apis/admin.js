@@ -52,3 +52,26 @@ export const deleteSellerAPI=(id)=>{
         }
     })
 }
+
+// 添加销售人员账号
+export const addSellerAPI=({name,password,brandId,category,avatar})=>{
+    return request({
+        url:'/admin/seller/register',
+        method:'POST',
+        data:{
+            name,password,brandId,category,avatar
+        }
+    })
+}
+
+// 上传头像
+export const uploadAvatarAPI=(data)=>{
+    return request({
+        url:'/upload/avatar',
+        method:'POST',
+        data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+    })
+}

@@ -11,6 +11,7 @@ import SellerAddGoods from '@/views/Seller/components/SellerAddGoods.vue'
 import AdminInfo from '@/views/Admin/components/AdminInfo.vue'
 import AdminStatistics from "@/views/Admin/components/AdminStatistics.vue";
 import AdminAccount from "@/views/Admin/components/AdminAccount.vue";
+import AdminAddAccount from "@/views/Admin/components/AdminAddAccount.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -64,6 +65,10 @@ const router = createRouter({
             {
               path:'account',
               component: AdminAccount
+            },
+            {
+              path:'add',
+              component: AdminAddAccount
             }
           ]
         }
