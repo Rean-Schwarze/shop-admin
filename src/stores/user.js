@@ -2,7 +2,7 @@
 
 import {defineStore} from "pinia";
 import {ref} from "vue";
-import {getUserTpAndBuyLogAPI, loginAPI, uploadAvatarAPI, uploadGoodsImagesAPI} from "@/apis/user.js";
+import {getUserTpAndBuyLogAPI, loginAPI, uploadGoodsImagesAPI} from "@/apis/user.js";
 import { ElMessage } from 'element-plus'
 
 export const useUserStore=defineStore('user',()=>{
