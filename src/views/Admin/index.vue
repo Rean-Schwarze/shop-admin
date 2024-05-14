@@ -32,7 +32,8 @@ onMounted(()=>checkLogin())
         </div>
         <h4>账号管理</h4>
         <div class="links">
-          <RouterLink to="/admin/account">添加账号</RouterLink>
+          <RouterLink to="/admin/account">账号列表</RouterLink>
+          <RouterLink to="/admin/add">添加账号</RouterLink>
         </div>
       </div>
     </div>
@@ -49,7 +50,7 @@ onMounted(()=>checkLogin())
   padding-top: 20px;
 
   .xtx-member-aside {
-    min-height: 400px;
+    min-height: 500px;
     width: 190px;
     margin-right: 20px;
     border-radius: 2px;

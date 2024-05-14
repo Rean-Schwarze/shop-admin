@@ -48,6 +48,7 @@ declare module 'vue' {
     LogDialog: typeof import('./src/components/dialog/LogDialog.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SellerEditDialog: typeof import('./src/components/dialog/SellerEditDialog.vue')['default']
     XtxSku: typeof import('./src/components/XtxSku/index.vue')['default']
   }
   export interface ComponentCustomProperties {

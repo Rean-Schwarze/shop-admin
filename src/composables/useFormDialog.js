@@ -4,14 +4,7 @@ import {ref} from "vue";
 export const useFormDialog=(formInstance)=>{
     const { visible, mode, updateMode } = useDialogState();
 
-    const form=ref({
-        receiver:'',
-        contact:'',
-        region:'',
-        address:'',
-        isDefault:false,
-        id:-1
-    })
+    const form=ref({})
 
     const selectedOptions = ref([])
 
@@ -23,11 +16,12 @@ export const useFormDialog=(formInstance)=>{
         updateMode(target);
         visible.value = true;
         formInstance.value?.resetFields();
-        if (typeof newForm!=="undefined" && newForm!==null){
-            // deep copy
-            form.value=JSON.parse(JSON.stringify(newForm))
-            selectedOptions.value=form.value.region?.split(" ")
-        }
+        // if (typeof newForm!=="undefined" && newForm!==null){
+        //     // deep copy
+        //     form.value=JSON.parse(JSON.stringify(newForm))
+        //     selectedOptions.value=form.value.region?.split(" ")
+        // }
+        form.value=newForm
     };
 
     const modeText = () => {
