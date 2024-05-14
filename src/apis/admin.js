@@ -41,3 +41,14 @@ export const resetSellerPasswordAPI=({id, newPassword})=>{
         }
     })
 }
+
+// 删除销售人员账号
+export const deleteSellerAPI=(id)=>{
+    return request({
+        url:'/admin/seller',
+        method:'DELETE',
+        params:{
+            id
+        }
+    })
+}

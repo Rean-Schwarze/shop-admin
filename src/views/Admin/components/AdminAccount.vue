@@ -2,7 +2,7 @@
 import {onMounted,ref} from "vue";
 import {Close, Delete, Edit, Search, Tickets} from "@element-plus/icons-vue";
 import {useUserStore} from "@/stores/user.js";
-import {getBrandsAPI,getSellerCountsAPI,getSellerAPI} from "@/apis/admin.js";
+import {getSellerCountsAPI,getSellerAPI,deleteSellerAPI} from "@/apis/admin.js";
 import SellerEditDialog from "@/components/dialog/SellerEditDialog.vue";
 import {MODE} from "@/composables/dialogTypes.js";
 
@@ -10,12 +10,8 @@ const userStore=useUserStore();
 const userType=userStore.userInfo.type
 const sellerEditDialogRef=ref(SellerEditDialog)
 
-const brands=ref([])
-
 const init=async ()=>{
-  const res=await getBrandsAPI()
-  brands.value=res.result
-  brands.value.push({id:0,name:'全部'})
+  await userStore.getBrands()
 }
 
 onMounted(()=>{
@@ -50,6 +46,17 @@ const handleEdit=(index,row)=>{
   sellerEditDialogRef.value.openDialog(MODE.EDIT,form)
 }
 
+const handleDelete=async (index,row)=>{
+  const res=await deleteSellerAPI(row.id)
+  if(res.code===1){
+    ElMessage.success("删除账号【"+row.name+"】（id："+row.id+"）成功！")
+  }
+  else{
+    ElMessage.error(res.message)
+  }
+  await getSeller()
+}
+
 const handleSellerChange=async ()=>{
   await getSeller()
 }
@@ -74,7 +81,7 @@ const handleSearch=()=>{
         </el-col>
         <el-col :span="10" style="margin: auto;">
           <el-select v-model="pageParams.brand_id" placeholder="请选择品牌" style="width:260px;" @change="getSeller">
-            <el-option v-for="items in brands" :key="items.id" :label="items.name" :value="items.id"/>
+            <el-option v-for="items in userStore.brands" :key="items.id" :label="items.name" :value="items.id"/>
           </el-select>
           <el-button :icon="Close" @click="clear" />
         </el-col>
@@ -106,6 +113,9 @@ const handleSearch=()=>{
           <template   #default="scope">
             <div class="table-button">
               <el-button size="default" @click="handleEdit(scope.$index, scope.row)" :icon="Edit"></el-button>
+            </div>
+            <div class="table-button">
+              <el-button size="default" @click="handleDelete(scope.$index, scope.row)" :icon="Delete" type="danger"></el-button>
             </div>
           </template>
         </el-table-column>
