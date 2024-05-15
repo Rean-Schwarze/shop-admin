@@ -88,7 +88,7 @@ const doLogin=()=>{
                 </el-select>
               </el-form-item>
               <el-form-item prop="account"  label="账户">
-                <el-input style="height:40px;" placeholder="手机号/邮箱" v-model="form.account"/>
+                <el-input style="height:40px;" placeholder="账号名" v-model="form.account"/>
               </el-form-item>
               <el-form-item prop="password" label="密码">
                 <el-input style="height:40px;" v-model="form.password" show-password/>
