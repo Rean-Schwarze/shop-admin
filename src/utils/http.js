@@ -3,9 +3,12 @@ import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import {useUserStore} from "@/stores/user.js";
 import router from '@/router'
+
+const baseUrl='/api'
+
 // 创建axios实例
 const http = axios.create({
-    baseURL:'/api',
+    baseURL:baseUrl,
     timeout: 5000
 })
 
@@ -36,6 +39,13 @@ http.interceptors.response.use(res => res.data, e => {
         userStore.clearUserInfo()
         // 2. 跳转到登录页
         router.push('/login')
+    }
+    // 509 反爬虫机制
+    if(e.response.status===509){
+        const html = e.response.data;
+        const verifyWindow = window.open("","_blank","height=400,width=560");
+        verifyWindow.document.write(html);
+        verifyWindow.document.getElementById("baseUrl").value = baseUrl;
     }
     return Promise.reject(e)
 })
