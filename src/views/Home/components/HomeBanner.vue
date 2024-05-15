@@ -20,9 +20,9 @@ const {bannerList}=useBanner()
 
 <style scoped lang='scss'>
 .home-banner {
-  width: 1240px;
+  width: 1024px;
   height: 500px;
-  position: absolute;
+  margin: auto;
   left: 0;
   top: 0;
   z-index: 98;
