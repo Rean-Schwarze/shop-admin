@@ -21,6 +21,7 @@ const confirm = async () => {
   const res=await updateSkuPriceAndInventoryAPI(form.value[0].goodsId,form.value,userStore.userInfo.type)
   if(res.code===1){
     ElMessage.success("修改成功！")
+    location.reload()
   }
   else{
     ElMessage.error(res.message)
